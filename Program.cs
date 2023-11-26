@@ -23,6 +23,7 @@ builder.Services.AddAuthentication(options =>
     options.ResponseType = "code";
     options.Scope.Clear();
     options.Scope.Add("openid"); 
+    options.CallbackPath = "/Account/Callback";
 });
 
 var app = builder.Build();
