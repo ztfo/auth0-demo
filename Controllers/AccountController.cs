@@ -5,18 +5,22 @@ using Microsoft.AspNetCore.Mvc;
 
 public class AccountController : Controller
 {
-    public IActionResult Login(string returnUrl = "/")
+    public IActionResult Login(string returnUrl = "/Dashboard")
     {
         return Challenge(new AuthenticationProperties() { RedirectUri = returnUrl }, OpenIdConnectDefaults.AuthenticationScheme);
     }
 
-    public IActionResult Logout()
+    public async Task<IActionResult> Logout()
     {
-        return SignOut(CookieAuthenticationDefaults.AuthenticationScheme, OpenIdConnectDefaults.AuthenticationScheme);
+        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        await HttpContext.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme);
+
+        return RedirectToAction("Index", "Home");
     }
 
     public IActionResult Callback()
     {
         return RedirectToAction("Index", "Home");
     }
+
 }

@@ -24,6 +24,7 @@ builder.Services.AddAuthentication(options =>
     options.Scope.Clear();
     options.Scope.Add("openid"); 
     options.CallbackPath = "/Account/Callback";
+    options.SignedOutCallbackPath = "/Account/Logout";
 });
 
 var app = builder.Build();
@@ -36,7 +37,6 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();
 
 app.UseRouting();
 
@@ -48,5 +48,7 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapRazorPages();
+
+app.UseStaticFiles();
 
 app.Run();

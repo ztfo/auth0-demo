@@ -1,0 +1,10 @@
+@page
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<h1>Welcome, @User?.Identity?.Name!</h1>
+
+<p>This is your dashboard.</p>
+
+<a href="/Account/Logout">Logout</a>
