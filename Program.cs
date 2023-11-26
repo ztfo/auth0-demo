@@ -1,11 +1,8 @@
-using DotNetEnv;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
-
-Env.Load();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -18,11 +15,11 @@ builder.Services.AddAuthentication(options =>
     options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
 })
 .AddCookie()
-.AddOpenIdConnect(Options => 
+.AddOpenIdConnect(options => 
 {
-    options.Authority = $"https://{builder.Configuration["Auth0:Domain"]}";
-    options.ClientId = builder.Configuration["Auth0:ClientId"];
-    options.ClientSecret = builder.Configuration["Auth0:ClientSecret"];
+    options.Authority = $"https://{builder.Configuration["Auth0Domain"]}";
+    options.ClientId = builder.Configuration["Auth0ClientId"];
+    options.ClientSecret = builder.Configuration["Auth0ClientSecret"];
     options.ResponseType = "code";
     options.Scope.Clear();
     options.Scope.Add("openid"); 
@@ -44,6 +41,10 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapRazorPages();
 
