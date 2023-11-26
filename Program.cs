@@ -24,7 +24,7 @@ builder.Services.AddAuthentication(options =>
     options.Scope.Clear();
     options.Scope.Add("openid"); 
     options.CallbackPath = "/Account/Callback";
-    options.SignedOutCallbackPath = "/Account/Logout";
+    options.SignedOutCallbackPath = "/Home/Index";
 });
 
 var app = builder.Build();

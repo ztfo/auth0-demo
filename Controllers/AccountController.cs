@@ -12,8 +12,8 @@ public class AccountController : Controller
 
     public async Task<IActionResult> Logout()
     {
-        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         await HttpContext.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme);
+        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
         return RedirectToAction("Index", "Home");
     }
@@ -22,5 +22,4 @@ public class AccountController : Controller
     {
         return RedirectToAction("Index", "Home");
     }
-
 }
