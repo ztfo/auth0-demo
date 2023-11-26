@@ -1,0 +1,22 @@
+# .NET Core
+**/bin/
+**/obj/
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Visual Studio Code
+.vs/
+
+# Vim swap files
+*.swp
+*.swo
+
+# macOS
+.DS_Store
+
+# Environment variables
+.env
