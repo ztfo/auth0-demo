@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using auth0_demo.Models;
 
 namespace auth0_demo
 {
@@ -9,6 +10,7 @@ namespace auth0_demo
         {
         }
 
-        // Your DbSet properties go here...
+        public DbSet<User>? Users {get; set;}
+
     }
 }
